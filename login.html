@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <!-- *******************************************************************************************
+       * TODO(DEVELOPER): Paste the initialization snippet from:
+       * Firebase Console > Overview > Add Firebase to your web app. *
+       ***************************************************************************************** -->
+       <script src="https://cdn.firebase.com/libs/firebaseui/3.5.0/firebaseui.js"></script>
+       <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.0/firebaseui.css" />
+       <link href="https://fonts.googleapis.com/css?family=Poppins:400,800" rel="stylesheet" />
+   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+   <script src='https://static.tumblr.com/maopbtg/oimmiw86r/jquery.autosize-min.js'></script>
+   <script src='http://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js'></script>
+   <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+   <script src="https://cdn.firebase.com/libs/firebaseui/3.5.0/firebaseui.js"></script>
+    <script>
+            // Initialize Firebase
+            var config = {
+              apiKey: "AIzaSyBfNw37iyuwI3-W5Wn4H9P34n3f0rl5dzY",
+              authDomain: "login-476c9.firebaseapp.com",
+              databaseURL: "https://login-476c9.firebaseio.com",
+              projectId: "login-476c9",
+              storageBucket: "login-476c9.appspot.com",
+              messagingSenderId: "72881085156"
+            };
+            firebase.initializeApp(config);
+            </script>
+    <script type="text/javascript">
+      // FirebaseUI config.
+      var uiConfig = {
+        signInSuccessUrl: 'index.html', //mudar para upload.html quando lançar!
+        signInOptions: [
+          // Leave the lines as is for the providers you want to offer your users.
+          firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        ],
+        // tosUrl and privacyPolicyUrl accept either url string or a callback
+        // function.
+        // Terms of service url/callback.
+        tosUrl: 'tofService.html',
+        // Privacy policy url/callback.
+        privacyPolicyUrl: function() {
+          window.location.assign('privateP.html');
+        }
+      };
+
+      // Initialize the FirebaseUI Widget using Firebase.
+      var ui = new firebaseui.auth.AuthUI(firebase.auth());
+      // The start method will wait until the DOM is loaded.
+      ui.start('#firebaseui-auth-container', uiConfig);
+    </script>
+    <script>
+      // verifica se o user já está logado
+ $(document).ready(function(){ 
+      firebase.auth().onAuthStateChanged(user => {
+  if(user) {
+   window.location = 'index.html' //mudar para upload.html quando lançar!
+  } 
+      });
+      });    
+    </script>
+  </head>
+  <body>
+    <!-- The surrounding HTML is left untouched by FirebaseUI.
+         Your app may use that space for branding, controls and other customizations.-->
+    <div id="firebaseui-auth-container"></div>
+  </body>
+</html>
